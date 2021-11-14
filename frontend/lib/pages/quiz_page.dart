@@ -4,6 +4,7 @@ import 'package:frontend/Model/QuizQuestion.dart';
 import 'package:frontend/Model/QuizStatus.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:frontend/globals.dart' as globals;
 
 class QuizPage extends StatefulWidget {
   const QuizPage({Key? key}) : super(key: key);
@@ -28,13 +29,13 @@ class _QuizPageState extends State<QuizPage> {
   late QuizStatus quizStatusResponse = QuizStatus();
   late QuizQuestion questionStatusResponse = QuizQuestion();
   bool isLoading = false;
-  String token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzY4MDQ3ODIsImp0aSI6ImQ1MDY3ODZhLWI0YTMtNDYwYi04MzQ5LWFkZDJlOTQ2ZGIyYyIsImlzcyI6ImFwcC5tb2JpbGUiLCJ1bmFtZSI6Ik5vdml0YSIsInVpZCI6IjFkNjMxMzA4MGJhNzRjOTdhZmRhMzdlMDEwMmY5MDg3IiwiaGFzX292ZXJ3cml0dGVuX3Bhc3MiOnRydWUsImlzX3ZlcmlmaWVkIjp0cnVlLCJzY29wZSI6InRydXN0ZWQtdXNlciJ9.gxXmjsxjj50rsrtdgHTq_ugmz8glvTxtzIdCTVXsw8VmJzRW9HZaRl2toq9-d-glslNqZU593GCCzLYQdmk-meZp-c2YeB4R4LpUGVX15n1PqvT1jZKvJxLFeyFgt87cb4E0rYj_3rGO_CLTFSZ9XgS3_icZYgga84x3xpDTuCFiqnoVmkfF4rQQj_ibZNmfAG7urXmeGxRAyvvUg9bmtIoW1kGKW8nJHY4oAiWQHRXL3skAdhH9qdmua9-Mb_bCwoaSoNoHSISPIiy53xgduCi0AATPLFVAc2ayviPmtWWW6_gElkGMk_qrAxZbrt7ojRGIMCVhX7OpYS6oWg2Xl7atSkxrpkpXIMXYb0c2y8d1mwg0xBU7vSGWWoiKR-Tu8X-_DvQmwzaAOH25-PFvNKhh3v88sgzdVQ4lLs_rucvvK8HR59g0ntb1PN6g1xiFwfBFMM7cPj2YGlK_VPRLEBSqAgmn_Y8p1gJvBsrNpXgWIKzHoM1j9jhRMRJyqnCl";
+  String token = globals.token;
 
   void getDataFromAPIQuizStatus(String courseId) async {
     setState(() {
       isLoading = true;
     });
-    String API_URL = "https://18e9-202-137-29-147.ngrok.io/mobile/api/v1/courses/${courseId}/quiz";
+    String API_URL = "${globals.baseUrl}/courses/${courseId}/quiz";
     var response = await http.get(Uri.parse(API_URL), headers: {
       'Content-Type' : 'application/json',
       'Accept': 'application/json',
@@ -51,7 +52,7 @@ class _QuizPageState extends State<QuizPage> {
     setState(() {
       isLoading = true;
     });
-    String API_URL = "https://18e9-202-137-29-147.ngrok.io/mobile/api/v1/courses/${courseId}/quiz/questions";
+    String API_URL = "${globals.baseUrl}/courses/${courseId}/quiz/questions";
     var response = await http.get(Uri.parse(API_URL), headers: {
       'Content-Type' : 'application/json',
       'Accept': 'application/json',
@@ -68,7 +69,7 @@ class _QuizPageState extends State<QuizPage> {
     setState(() {
       isLoading = true;
     });
-    String API_URL = "https://18e9-202-137-29-147.ngrok.io/mobile/api/v1/courses/${courseId}/quiz/submit";
+    String API_URL = "${globals.baseUrl}/courses/${courseId}/quiz/submit";
     var response = await http.post(Uri.parse(API_URL), headers: {
     'Content-Type' : 'application/json',
     'Accept': 'application/json',
