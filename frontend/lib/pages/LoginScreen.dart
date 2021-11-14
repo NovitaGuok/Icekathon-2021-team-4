@@ -104,7 +104,7 @@ class LoginScreenState extends State<LoginScreen>
 
   Future<void> login() async {
     if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
-      String url = "https://18e9-202-137-29-147.ngrok.io/mobile/api/v1/auth";
+      String url = "${globals.baseUrl}/auth";
       User user = User(emailController.text, passwordController.text);
       final response = await http.post(Uri.parse(url), headers: {
         "Accept": "*/*",
