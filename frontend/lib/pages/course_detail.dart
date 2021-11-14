@@ -131,8 +131,7 @@ class _CourseDetailState extends State<CourseDetail> {
                   children: [
                     // first tab bar view widget
                     ListView(
-                      children: listLesson(lessonResponseModel.data ?? [])
-                      ,
+                      children: listLesson(lessonResponseModel.data ?? []),
                     ),
 
                     // second tab bar view widget
@@ -224,6 +223,9 @@ class _CourseDetailState extends State<CourseDetail> {
           )
       );
     }
+    list.add(
+      LessonCard("Story Carding Quiz #1", "Quiz", "Test your knowledge", "")
+    );
     return list;
   }
 }
