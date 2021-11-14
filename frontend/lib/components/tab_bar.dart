@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/pages/mylist_page.dart';
+import 'package:frontend/pages/search_page.dart';
 import '../pages/home.dart';
 
 /// This is the TabBar widget that the main application instantiates.
@@ -16,14 +18,8 @@ class _BottomTabBarState extends State<BottomTabBar> {
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
+    SearchPage(),
+    MyListPage()
   ];
 
   void _onItemTapped(int index) {
