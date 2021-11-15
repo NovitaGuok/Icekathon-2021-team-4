@@ -41,6 +41,13 @@ class LoginScreenState extends State<LoginScreen>
   TextEditingController passwordController = TextEditingController();
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    globals.token = "";
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -110,8 +117,8 @@ class LoginScreenState extends State<LoginScreen>
         "Accept": "*/*",
         "Content-Type": "application/json"
       }, body: jsonEncode({
-        "username": "novita@icehousecorp.com",
-        "password": "password"
+        "username": emailController.text,
+        "password": passwordController.text
       }));
       if (response.statusCode == 200) {
         globals.token = jsonDecode(response.body)['data']['token']['access_token'];
