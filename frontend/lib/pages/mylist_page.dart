@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/pages/my_course_list.dart';
+import 'package:frontend/pages/my_lessons_view.dart';
 
 class MyListPage extends StatefulWidget {
   const MyListPage({Key? key}) : super(key: key);
@@ -36,8 +38,8 @@ class _MyListPageState extends State<MyListPage> {
         ),
         body: const TabBarView(
           children: [
-            Center(child: Text('My Lessons View')),
-            Center(child: Text('My Courses View'))
+            MyLessonsView(),
+            MyCourseList()
           ],
         ),
       ),

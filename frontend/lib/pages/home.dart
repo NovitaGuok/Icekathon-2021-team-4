@@ -152,9 +152,9 @@ class _HomePageState extends State<HomePage> {
             padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
             child: HomeCourseCard(
               title: item[i].title ?? "",
-              subtitle: item[i].description ?? "",
+              subtitle: item[i].curriculumTitle ?? "",
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => CourseDetail(item[i].id ?? "", item[i].title ?? "", item[i].description ?? "")));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => CourseDetail(item[i].id ?? "", item[i].title ?? "", item[i].description ?? "", item[i].curriculumTitle ?? "")));
               },),
           )
     );
@@ -171,9 +171,9 @@ class _HomePageState extends State<HomePage> {
             padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
             child: HomeCourseCard(
               title: item[i].title ?? "",
-              subtitle: item[i].description ?? "",
+              subtitle: item[i].curriculumTitle ?? "",
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => CourseDetail(item[i].id ?? "", item[i].title ?? "", item[i].description ?? "")));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => CourseDetail(item[i].id ?? "", item[i].title ?? "", item[i].description ?? "", item[i].curriculumTitle ?? "")));
               },),
           )
       );

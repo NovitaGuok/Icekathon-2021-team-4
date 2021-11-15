@@ -9,21 +9,23 @@ class CourseDetail extends StatefulWidget {
   final String id;
   final String title;
   final String description;
+  final String curriculumTitle;
 
-  CourseDetail(this.id, this.title, this.description);
+  CourseDetail(this.id, this.title, this.description, this.curriculumTitle);
 
   @override
-  _CourseDetailState createState() => _CourseDetailState(id, title, description);
+  _CourseDetailState createState() => _CourseDetailState(id, title, description, curriculumTitle);
 }
 
 class _CourseDetailState extends State<CourseDetail> {
   final String id;
   final String title;
   final String description;
+  final String curriculumTitle;
 
   late Lesson lessonResponseModel = Lesson();
 
-  _CourseDetailState(this.id,this.title,this.description);
+  _CourseDetailState(this.id,this.title,this.description, this.curriculumTitle);
 
   final headers = {
     'Content-Type': 'application/json',
@@ -64,13 +66,14 @@ class _CourseDetailState extends State<CourseDetail> {
             children: <Widget>[
               // construct the profile details widget here
               LimitedBox(
-                maxHeight: 200,
+                maxHeight: 220,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Center(
                       child: Text(
                         title,
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
@@ -81,7 +84,7 @@ class _CourseDetailState extends State<CourseDetail> {
                     SizedBox(height: 20),
                     Center(
                       child: Text(
-                        'Business Analyst',
+                        curriculumTitle,
                         style: TextStyle(
                             fontWeight: FontWeight.bold
                         ),
@@ -223,9 +226,12 @@ class _CourseDetailState extends State<CourseDetail> {
           )
       );
     }
-    list.add(
-      LessonCard("Story Carding Quiz #1", "Quiz", "Test your knowledge", "")
-    );
+    if(item.length > 0) {
+      list.add(
+        LessonCard("Story Carding Quiz #1", "Quiz", "Test your knowledge", "")
+      );
+    }
+
     return list;
   }
 }

@@ -79,7 +79,7 @@ class _LessonCardState extends State<LessonCard> {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => WebViewPage(url, title)));
                       }
                     },
-                    child: Text('Start lesson'),
+                    child: Text(subtitle == "Quiz" ? 'Start quiz' : 'Start lesson'),
                     style: TextButton.styleFrom(
                       primary: Colors.white,
                       padding: EdgeInsets.zero,

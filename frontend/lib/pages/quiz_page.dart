@@ -323,7 +323,7 @@ class _QuizPageState extends State<QuizPage> {
                                     color: Theme.of(context).primaryColor,
                                     textStyle: TextStyle(fontWeight: FontWeight.bold),
                                     onPressed: () {
-                                      print("go back");
+                                      Navigator.pop(context);
                                     })
                               ],
                             ),
