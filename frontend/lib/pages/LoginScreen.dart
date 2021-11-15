@@ -118,7 +118,7 @@ class LoginScreenState extends State<LoginScreen>
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => const BottomTabBar()));
         ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text("Yeayyy.")));
+            .showSnackBar(const SnackBar(content: Text("Login success.")));
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text("Invalid credentials.")));

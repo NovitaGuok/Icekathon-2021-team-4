@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/pages/quiz_page.dart';
+import 'package:frontend/pages/video_player.dart';
 import 'package:frontend/pages/webview.dart';
 
 class LessonCard extends StatefulWidget {
@@ -75,6 +76,8 @@ class _LessonCardState extends State<LessonCard> {
                     onPressed: () {
                       if(subtitle == "Quiz"){
                         Navigator.push(context, MaterialPageRoute(builder: (context) => QuizPage()));
+                      } else if(subtitle == 'video') {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => VideoPlayerPage(url: url, title: title)));
                       } else {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => WebViewPage(url, title)));
                       }

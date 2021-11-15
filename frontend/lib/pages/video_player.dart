@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:better_player/better_player.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideoPlayerPage extends StatefulWidget {
   final String url;
@@ -12,8 +13,7 @@ class VideoPlayerPage extends StatefulWidget {
 }
 
 class _VideoPlayerPageState extends State<VideoPlayerPage> {
-  late BetterPlayerController _betterPlayerController;
-  late BetterPlayerDataSource _betterPlayerDataSource;
+  late YoutubePlayerController _controller;
   final String url;
   final String title;
 
@@ -21,14 +21,13 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
 
   @override
   void initState() {
-    BetterPlayerConfiguration betterPlayerConfiguration = const BetterPlayerConfiguration(
-      aspectRatio: 16 / 9,
-      fit: BoxFit.contain,
-      autoPlay: false,
+    String id = YoutubePlayer.convertUrlToId(url)!;
+    _controller = YoutubePlayerController(
+      initialVideoId: id,
+      flags: YoutubePlayerFlags(
+        autoPlay: true
+      ),
     );
-    _betterPlayerDataSource = BetterPlayerDataSource(BetterPlayerDataSourceType.network, url);
-    _betterPlayerController = BetterPlayerController(betterPlayerConfiguration);
-    _betterPlayerController.setupDataSource(_betterPlayerDataSource);
     super.initState();
   }
 
@@ -39,15 +38,16 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
         title: Text(title),
         backgroundColor: Colors.black,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const SizedBox(height: 8),
-          AspectRatio(
-            aspectRatio: 16 / 9,
-            child: BetterPlayer(controller: _betterPlayerController),
+      body: Center(
+        child: YoutubePlayerBuilder(
+          player: YoutubePlayer(
+            controller: _controller,
+            showVideoProgressIndicator: true,
           ),
-        ],
+          builder: (context, player) {
+            return player;
+          },
+        ),
       ),
     );
   }
