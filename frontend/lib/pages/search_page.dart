@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:frontend/globals.dart' as globals;
+import 'dart:convert';
+import 'package:frontend/Model/MyCurriculum.dart';
+import 'course_detail.dart';
+import 'package:frontend/components/HomeCourseCard.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -8,6 +14,22 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+
+  late MyCurriculum apiResponseModel = MyCurriculum();
+
+  void getDataFromAPICurriculum(String keyword) async {
+    String API_URL = "${globals.baseUrl}/courses/curriculum-based?page=1&per_page=10&search_keyword=$keyword&sort=DESC";
+    var response = await get(Uri.parse(API_URL), headers: {
+      'Content-Type' : 'application/json',
+      'Accept': 'application/json',
+      'Authorization' : 'Bearer ${globals.token}'
+    });
+    var parsedJson = await json.decode(response.body);
+    setState(() {
+      apiResponseModel = MyCurriculum.fromJson(parsedJson);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,6 +54,15 @@ class _SearchPageState extends State<SearchPage> {
             size: 28,
           ),
           title: TextField(
+            onSubmitted: (field) {
+              if (field.isEmpty) {
+                setState(() {
+                  apiResponseModel = MyCurriculum();
+                });
+              } else {
+                getDataFromAPICurriculum(field);
+              }
+            },
             decoration: InputDecoration(
               focusedBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2)
@@ -46,7 +77,22 @@ class _SearchPageState extends State<SearchPage> {
           ),
         ),
       ),
-      body: Container(),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: ListView.builder(
+            itemCount: (apiResponseModel.data ?? []).length,
+            itemBuilder: (context, index) {
+              Data course = apiResponseModel.data![index];
+              return HomeCourseCard(
+                title: course.title ?? "",
+                subtitle: course.curriculumTitle ?? "",
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => CourseDetail(course.id ?? "", course.title ?? "", course.description ?? "", course.curriculumTitle ?? "")));
+                },
+              );
+            }
+        ),
+      ),
     );
   }
 }
